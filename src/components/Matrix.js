@@ -95,62 +95,58 @@ const Matrix = ({ matrixDate, setMatrixDate }) => {
           August <span className='color-green'>2019</span>
         </h1>
         <div className='columns'>
-          <div className='day-week'>
-            <p>Monday</p>
-            <Cell></Cell>
-            <Cell></Cell>
-            <Cell></Cell>
-            <Cell></Cell>
-            <Cell></Cell>
-          </div>
-          <div className='day-week'>
-            <p>Monday</p>
-            <Cell></Cell>
-            <Cell></Cell>
-            <Cell></Cell>
-            <Cell></Cell>
-            <Cell></Cell>
-          </div>
-          <div className='day-week'>
-            <p>Monday</p>
-            <Cell></Cell>
-            <Cell></Cell>
-            <Cell></Cell>
-            <Cell></Cell>
-            <Cell></Cell>
-          </div>
-          <div className='day-week'>
-            <p>Monday</p>
-            <Cell></Cell>
-            <Cell></Cell>
-            <Cell></Cell>
-            <Cell></Cell>
-            <Cell></Cell>
-          </div>
-          <div className='day-week'>
-            <p>Monday</p>
-            <Cell></Cell>
-            <Cell></Cell>
-            <Cell></Cell>
-            <Cell></Cell>
-            <Cell></Cell>
-          </div>
-          <div className='day-week'>
-            <p>Monday</p>
-            <Cell></Cell>
-            <Cell></Cell>
-            <Cell></Cell>
-            <Cell></Cell>
-            <Cell></Cell>
-          </div>
-          <div className='day-week'>
-            <p>Monday</p>
-            <Cell></Cell>
-            <Cell></Cell>
-            <Cell></Cell>
-            <Cell></Cell>
-            <Cell></Cell>
-          </div>
+        <div className="day-week">
+          <div className="row">
+       <p>Monday</p>
+       <p>Monday</p>
+       <p>Monday</p>
+       <p>Monday</p>
+       <p>Monday</p>
+       <p>Monday</p>
+       <p>Monday</p>
+       </div>
+       <div className="Cell-row">
+       <Cell></Cell>
+       <Cell></Cell>
+       <Cell></Cell>
+       <Cell></Cell>
+       <Cell></Cell>
+       <Cell></Cell>
+       <Cell></Cell>
+       </div> <div className="Cell-row">
+       <Cell></Cell>
+       <Cell></Cell>
+       <Cell></Cell>
+       <Cell></Cell>
+       <Cell></Cell>
+       <Cell></Cell>
+       <Cell></Cell>
+       </div> <div className="Cell-row">
+       <Cell></Cell>
+       <Cell></Cell>
+       <Cell></Cell>
+       <Cell></Cell>
+       <Cell></Cell>
+       <Cell></Cell>
+       <Cell></Cell>
+       </div> <div className="Cell-row">
+       <Cell></Cell>
+       <Cell></Cell>
+       <Cell></Cell>
+       <Cell></Cell>
+       <Cell></Cell>
+       <Cell></Cell>
+       <Cell></Cell>
+       </div> <div className="Cell-row">
+       <Cell></Cell>
+       <Cell></Cell>
+       <Cell></Cell>
+       <Cell></Cell>
+       <Cell></Cell>
+       <Cell></Cell>
+       <Cell></Cell>
+       </div>
+        </div>  
         </div>
       </div>
     </>
