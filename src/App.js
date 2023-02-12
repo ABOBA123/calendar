@@ -5,11 +5,11 @@ import Matrix from "./components/Matrix";
 
 function App() {
   const [matrix, setMatrix] = useState(new Date());
-  const [active, setActiveDate] = useState(new Date());
+  const [activeDate, setActiveDate] = useState(new Date());
   return (
     <div>
       <div className='first-slide'>
-        <Matrix matrixDate={matrix} setMatrixDate={setMatrix} />
+        <Matrix matrixDate={matrix} setMatrixDate={setMatrix} activeDate={activeDate} setActiveDate={setActiveDate}/>
       </div>
     </div>
   );

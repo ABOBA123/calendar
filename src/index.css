@@ -27,8 +27,8 @@ code {
   justify-content: space-around;
 }
 .calendar{
-  width: 70%;
-  height: 85%;
+  width: 75%;
+  height: 100%;
   border-radius: 15px;
   display: flex;
   align-items: center;
@@ -83,7 +83,30 @@ code {
   flex-direction: row;
   justify-content: space-around;
 }
-
-
-
-
+.Cell-row-active{
+  background-color: aqua;
+}
+.bag-red{
+  background-color: brown;
+}
+.back-popup{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.39);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+}
+.popup{
+  width: 900px;
+  height: 700px;
+  border-radius: 10px;
+  background-color: aliceblue;
+}
+.todo-popup{
+  width: 800px;
+  height: 600px;
+  background-color: rgb(62, 99, 99);
+  position: fixed;
+}

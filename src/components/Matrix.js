@@ -1,9 +1,40 @@
 import React, { useEffect, useState } from "react";
 import Cell from "./cell";
-
-const Matrix = ({ matrixDate, setMatrixDate }) => {
+let months = [
+  "Январь",
+  "Февраль",
+  "Март",
+  "Апрель",
+  "Май",
+  "Июнь",
+  "Июль",
+  "Август",
+  "Сентябрь",
+  "Октябрь",
+  "Ноябрь",
+  "Декабрь",
+];
+const Matrix = ({ matrixDate, setMatrixDate, activeDate, setActiveDate }) => {
   const [matrix, setMatrix] = useState([]);
+  const [popup, setPopup] = useState(false);
+  const [popupMonth, setPopupMonth] = useState(false);
+  const [popupTodo, setPopupTodo] = useState(false);
+  const [year, setYear] = useState();
+  const [todo, setTodo] = useState("");
+  const [todos, setTodos] = useState([
+    { date: new Date(), name: "Купить хлеб", completed: false },
+    { date: new Date(), name: "Читать книгу", completed: true },
+  ]);
 
+  const AddTodo = () => {
+    if (todos != "") {
+      setTodos([
+        ...todos,
+        { date: new Date(activeDate), name: todo, completed: false },
+      ]);
+      setTodo("");
+    }
+  };
   useEffect(() => {
     let initDate = new Date(matrixDate);
     let startDate = new Date(initDate.getFullYear(), initDate.getMonth(), 1);
@@ -69,13 +100,264 @@ const Matrix = ({ matrixDate, setMatrixDate }) => {
 
     setMatrix(matrix);
   }, [matrixDate]);
-
+  // console.log(matrix)
   return (
     <>
-      <div className='calendar'>
-        <div className='fringe'>
+      <div className="calendar">
+        {popupTodo && (
           <div
-            className='btn-white cursor-p'
+            className="back-popup"
+            onClick={() => {
+              setPopupTodo(false);
+            }}
+          >
+            <div
+              className="todo-popup"
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
+              <input
+                placeholder="Введите новую заметку"
+                onChange={(e) => {
+                  setTodo(e.target.value);
+                }}
+              />
+              <button onClick={AddTodo}>Добавить</button>
+              {todos?.length > 0 ? (
+                <ul>
+                  {todos.map(
+                    (todo, index) =>
+                      new Date(todo.date).getDate() ===
+                        new Date(activeDate).getDate() &&
+                      new Date(todo.date).getFullYear() ===
+                        new Date(activeDate).getFullYear() &&
+                      new Date(todo.date).getMonth() ===
+                        new Date(activeDate).getMonth() && (
+                        <li
+                          key={index}
+                          onClick={() => {
+                            // console.log("click")
+
+                            todos[index] = {
+                              date: todo.date,
+                              name: todo.name,
+                              completed: !todo.completed,
+                            };
+                            setTodos(todos);
+                          }}
+                          style={{
+                            textDecoration:
+                              todo.completed == true ? "line-through" : null,
+                          }}
+                        >
+                          {todo.name}
+                          <button onClick={() => {
+                            let arr = todos;
+                            let arr2 =[];
+                            for (let i of arr){
+                              if(i.name==todo.name){
+                                if(i.date==todo.date){
+                                }
+                                else{
+                                  arr2.push(i)
+                                }
+                              }
+                              else{
+                                arr2.push(i)
+                              }
+                            }
+                            console.log(arr2)
+                           setTodos(arr2)
+                           
+                          }}>D</button>
+                        </li>
+                      )
+                  )}
+                </ul>
+              ) : (
+                <p>No task</p>
+              )}
+              {/* {todos.map && todos.length && {todos}} */}
+            </div>
+          </div>
+        )}
+        {popup && (
+          <div className="back-popup">
+            <div className="todo-popup"></div>
+          </div>
+        )}
+        {popup && (
+          <div
+            className="back-popup"
+            onClick={() => {
+              setPopup(false);
+            }}
+          >
+            <div
+              className="popup"
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
+              <input
+                placeholder="Введите год"
+                value={year}
+                onChange={(e) => {
+                  setYear(e.target.value);
+                }}
+              />
+              <button
+                onClick={() => {
+                  setMatrixDate(
+                    new Date(year, matrixDate.getMonth(), matrixDate.getDay())
+                  );
+                }}
+              >
+                Подтвердить
+              </button>
+            </div>
+          </div>
+        )}
+        {popupMonth && (
+          <div
+            className="back-popup"
+            onClick={() => {
+              setPopupMonth(false);
+            }}
+          >
+            <div
+              className="popup"
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
+              <button
+                onClick={() => {
+                  setMatrixDate(
+                    new Date(matrixDate.getFullYear(), 0, matrixDate.getDate())
+                  );
+                  setPopupMonth(false);
+                }}
+              >
+                Январь
+              </button>
+              <button
+                onClick={() => {
+                  setMatrixDate(
+                    new Date(matrixDate.getFullYear(), 1, matrixDate.getDate())
+                  );
+                  setPopupMonth(false);
+                }}
+              >
+                Февраль
+              </button>
+              <button
+                onClick={() => {
+                  setMatrixDate(
+                    new Date(matrixDate.getFullYear(), 2, matrixDate.getDate())
+                  );
+                  setPopupMonth(false);
+                }}
+              >
+                Март
+              </button>
+              <button
+                onClick={() => {
+                  setMatrixDate(
+                    new Date(matrixDate.getFullYear(), 3, matrixDate.getDate())
+                  );
+                  setPopupMonth(false);
+                }}
+              >
+                Апрель
+              </button>
+              <button
+                onClick={() => {
+                  setMatrixDate(
+                    new Date(matrixDate.getFullYear(), 4, matrixDate.getDate())
+                  );
+                  setPopupMonth(false);
+                }}
+              >
+                Май
+              </button>
+              <button
+                onClick={() => {
+                  setMatrixDate(
+                    new Date(matrixDate.getFullYear(), 5, matrixDate.getDate())
+                  );
+                  setPopupMonth(false);
+                }}
+              >
+                Июнь
+              </button>
+              <button
+                onClick={() => {
+                  setMatrixDate(
+                    new Date(matrixDate.getFullYear(), 6, matrixDate.getDate())
+                  );
+                  setPopupMonth(false);
+                }}
+              >
+                Июль
+              </button>
+              <button
+                onClick={() => {
+                  setMatrixDate(
+                    new Date(matrixDate.getFullYear(), 7, matrixDate.getDate())
+                  );
+                  setPopupMonth(false);
+                }}
+              >
+                Август
+              </button>
+              <button
+                onClick={() => {
+                  setMatrixDate(
+                    new Date(matrixDate.getFullYear(), 8, matrixDate.getDate())
+                  );
+                  setPopupMonth(false);
+                }}
+              >
+                Сентябрь
+              </button>
+              <button
+                onClick={() => {
+                  setMatrixDate(
+                    new Date(matrixDate.getFullYear(), 9, matrixDate.getDate())
+                  );
+                  setPopupMonth(false);
+                }}
+              >
+                Октябрь
+              </button>
+              <button
+                onClick={() => {
+                  setMatrixDate(
+                    new Date(matrixDate.getFullYear(), 10, matrixDate.getDate())
+                  );
+                  setPopupMonth(false);
+                }}
+              >
+                Ноябрь
+              </button>
+              <button
+                onClick={() => {
+                  setMatrixDate(
+                    new Date(matrixDate.getFullYear(), 11, matrixDate.getDate())
+                  );
+                  setPopupMonth(false);
+                }}
+              >
+                Декабрь
+              </button>
+            </div>
+          </div>
+        )}
+        <div className="fringe">
+          <div
+            className="btn-white cursor-p"
             onClick={() => {
               setMatrixDate(
                 new Date(
@@ -88,65 +370,72 @@ const Matrix = ({ matrixDate, setMatrixDate }) => {
           >
             {"<"}
           </div>
-          <h1>Today</h1>
-          <div className='btn-white cursor-p'>{">"}</div>
+          <h1>Today</h1>{" "}
+          <div
+            className="btn-white cursor-p"
+            onClick={() => {
+              // setPopupMonth(true)
+              setMatrixDate(
+                new Date(
+                  new Date(matrixDate).getFullYear(),
+                  new Date(matrixDate).getMonth() + 1,
+                  1
+                )
+              );
+            }}
+          >
+            {">"}
+          </div>
         </div>
-        <h1 className='month-size'>
-          August <span className='color-green'>2019</span>
+        <h1
+          className="month-size"
+          onClick={() => {
+            setPopupMonth(true);
+          }}
+        >
+          {months[new Date(matrixDate).getMonth()]}
+          <span
+            className="color-green"
+            onClick={() => {
+              setPopup(true);
+            }}
+          >
+            {new Date(matrixDate).getFullYear()}
+            {/* {year} */}
+          </span>
         </h1>
-        <div className='columns'>
-        <div className="day-week">
-          <div className="row">
-       <p>Monday</p>
-       <p>Monday</p>
-       <p>Monday</p>
-       <p>Monday</p>
-       <p>Monday</p>
-       <p>Monday</p>
-       <p>Monday</p>
-       </div>
-       <div className="Cell-row">
-       <Cell></Cell>
-       <Cell></Cell>
-       <Cell></Cell>
-       <Cell></Cell>
-       <Cell></Cell>
-       <Cell></Cell>
-       <Cell></Cell>
-       </div> <div className="Cell-row">
-       <Cell></Cell>
-       <Cell></Cell>
-       <Cell></Cell>
-       <Cell></Cell>
-       <Cell></Cell>
-       <Cell></Cell>
-       <Cell></Cell>
-       </div> <div className="Cell-row">
-       <Cell></Cell>
-       <Cell></Cell>
-       <Cell></Cell>
-       <Cell></Cell>
-       <Cell></Cell>
-       <Cell></Cell>
-       <Cell></Cell>
-       </div> <div className="Cell-row">
-       <Cell></Cell>
-       <Cell></Cell>
-       <Cell></Cell>
-       <Cell></Cell>
-       <Cell></Cell>
-       <Cell></Cell>
-       <Cell></Cell>
-       </div> <div className="Cell-row">
-       <Cell></Cell>
-       <Cell></Cell>
-       <Cell></Cell>
-       <Cell></Cell>
-       <Cell></Cell>
-       <Cell></Cell>
-       <Cell></Cell>
-       </div>
-        </div>  
+        <div className="columns">
+          <div className="day-week">
+            <div className="row">
+              <p>Monday</p>
+              <p>tuesday </p>
+              <p>wednesday </p>
+              <p>thursday </p>
+              <p>friday </p>
+              <p>saturday </p>
+              <p>sunday</p>
+            </div>
+            {matrix &&
+              matrix.length > 0 &&
+              matrix.map(
+                (row) =>
+                  row &&
+                  row.length > 0 && (
+                    <div className="Cell-row">
+                      {row.map((item) => (
+                        <Cell
+                          popupTodo={popupTodo}
+                          setPopupTodo={setPopupTodo}
+                          activeDate={activeDate}
+                          setActiveDate={setActiveDate}
+                        >
+                          {new Date(item)}
+                        </Cell>
+                      ))}
+                    </div>
+                  )
+              )}
+          </div>
         </div>
       </div>
     </>
